@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+    background: rgb(241, 245, 241);
+}
