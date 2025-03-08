@@ -39,7 +39,7 @@ const Listing = () => {
     const fetchListing = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:3000/api/listing/get/${params.listingId}`);
+        const res = await fetch(`http://localhost:3000/api/listing/create`);
         const data = await res.json();
         if (data.success === false) {
           setError(true);
