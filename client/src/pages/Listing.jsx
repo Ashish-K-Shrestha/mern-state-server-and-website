@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
-import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
-import { useSelector } from "react-redux";  
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import {
-    FaBath,
-    FaBed,
-    FaChair,
-    FaMapMarkedAlt,
-    FaMapMarkerAlt,
-    FaParking,
-    FaShare,
-  } from 'react-icons/fa';
+  FaBath,
+  FaBed,
+  FaChair,
+  FaMapMarkerAlt,
+  FaParking,
+  FaShare
+} from 'react-icons/fa';
 import Contact from "../components/Contact";
 
 const Listing = () => {
@@ -25,13 +24,13 @@ const Listing = () => {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-    const [copied, setCopied] = useState(false);
-    const [contact, setContact] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [contact, setContact] = useState(false);
 
 
 
 
-    const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   console.log(listing);
 
@@ -39,7 +38,7 @@ const Listing = () => {
     const fetchListing = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:3000/api/listing/create`);
+        const res = await fetch(`http://localhost:3000/api/listing/c`);
         const data = await res.json();
         if (data.success === false) {
           setError(true);
@@ -95,12 +94,12 @@ const Listing = () => {
             />
           </div>
 
-            {copied && (
-                <p className='fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2'>Link Copied!</p>
-            )}
+          {copied && (
+            <p className='fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2'>Link Copied!</p>
+          )}
 
 
-            <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
+          <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
             <p className='text-2xl font-semibold'>
               {listing.name} - ${''}
               {listing.offer
@@ -148,15 +147,15 @@ const Listing = () => {
                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
               </li>
             </ul>
-            
+
             {currentUser && listing.userRef !== currentUser._id && !contact && (
-                <button
-                    onClick = {() => setContact(true)}
-                    className="bg-slate-700 text-white rounded-lg uppercase p-3 hover:opacity-95"
-                >Contact Landlord</button>
+              <button
+                onClick={() => setContact(true)}
+                className="bg-slate-700 text-white rounded-lg uppercase p-3 hover:opacity-95"
+              >Contact Landlord</button>
             )}
-            
-            {contact && <Contact listing={listing} /> }
+
+            {contact && <Contact listing={listing} />}
 
 
           </div>
